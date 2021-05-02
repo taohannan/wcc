@@ -6,9 +6,7 @@ import com.wcc.assessment.web.rest.vm.DistanceResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PostCodeController {
@@ -29,15 +27,37 @@ public class PostCodeController {
         PostCode postCodeFrom = postCodeService.getPostCodeDetail(postcodeFrom);
         PostCode postCodeTo = postCodeService.getPostCodeDetail(postcodeTo);
 
-        double distance = postCodeService.calculateDistance(postCodeFrom,postCodeTo);
+        double distance = postCodeService.calculateDistance(postCodeFrom, postCodeTo);
         response.setFrom_location(postCodeFrom);
         response.setTo_location(postCodeTo);
         response.setDistance(distance);
 
         return ResponseEntity.ok(response);
+    }
 
+    @GetMapping("/postcode")
+    public ResponseEntity<PostCode> getPostCode(@RequestParam(name = "postcode") String postCode) {
+
+        return ResponseEntity.ok(postCodeService.getPostCodeDetail(postCode));
 
     }
 
+    @PutMapping("/postcode")
+    public ResponseEntity<PostCode> updatePostcode(PostCode postCode) throws Exception {
 
+        if (postCode.getId() == null) {
+            throw new Exception("Id cannot be null");
+        }
+
+        return ResponseEntity.ok(postCodeService.updatePostcode(postCode));
+    }
+
+    @PostMapping("/postcode")
+    public ResponseEntity<PostCode> createPostcode(PostCode postCode) throws Exception {
+        if (postCode.getId() != null) {
+            throw new Exception("Wrong Id");
+        }
+
+        return ResponseEntity.ok(postCodeService.updatePostcode(postCode));
+    }
 }

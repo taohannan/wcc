@@ -31,4 +31,9 @@ public class PostCodeService {
         return distance;
 
     }
+
+    public PostCode updatePostcode(PostCode postCode) {
+        return postCodeRepository.save(postCode);
+    }
+
 }

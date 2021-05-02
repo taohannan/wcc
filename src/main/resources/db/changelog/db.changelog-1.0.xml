@@ -11,7 +11,7 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="postcode" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true" unique="true"/>
             </column>
             <column name="latitude" type="VARCHAR(255)"/>
             <column name="longitude" type="VARCHAR(255)"/>

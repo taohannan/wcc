@@ -1,9 +1,7 @@
 package com.wcc.assessment.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.annotation.Generated;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,6 +9,7 @@ import java.io.Serializable;
 public class PostCode implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "postcode")
