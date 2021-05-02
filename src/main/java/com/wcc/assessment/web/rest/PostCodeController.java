@@ -43,7 +43,7 @@ public class PostCodeController {
     }
 
     @PutMapping("/postcode")
-    public ResponseEntity<PostCode> updatePostcode(PostCode postCode) throws Exception {
+    public ResponseEntity<PostCode> updatePostcode(@RequestBody PostCode postCode) throws Exception {
 
         if (postCode.getId() == null) {
             throw new Exception("Id cannot be null");
@@ -53,9 +53,9 @@ public class PostCodeController {
     }
 
     @PostMapping("/postcode")
-    public ResponseEntity<PostCode> createPostcode(PostCode postCode) throws Exception {
+    public ResponseEntity<PostCode> createPostcode(@RequestBody PostCode postCode) throws Exception {
         if (postCode.getId() != null) {
-            throw new Exception("Wrong Id");
+            throw new Exception("Id must be null");
         }
 
         return ResponseEntity.ok(postCodeService.updatePostcode(postCode));
